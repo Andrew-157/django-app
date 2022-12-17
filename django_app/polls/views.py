@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from .models import Question, Choice
 
@@ -19,3 +20,10 @@ def poll(request, poll_id):
     context = {'question': question, 'choices': choices}
 
     return render(request, 'polls/question.html', context)
+
+
+def results(request):
+
+    choice = request.POST['choice']
+
+    return HttpResponse(choice)
