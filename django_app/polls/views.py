@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import authenticate as auth
+from django.contrib.auth import logout as lo
 
 from .models import Question, Choice
 
@@ -19,7 +20,7 @@ def create_user(request):
 
 def authenticate(request):
 
-    get_object_or_404(User, username='senator')
+    get_object_or_404(User, username='jack')
 
     user = auth(username='jack', password='password')
 
@@ -59,3 +60,8 @@ def results(request):
         return HttpResponse('Incorrect')
 
     return HttpResponse('Correct')
+
+
+def logout(request):
+
+    lo(request)
