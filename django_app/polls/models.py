@@ -12,6 +12,7 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=128)
     votes = models.IntegerField(default=0)
+    is_valid = models.BooleanField(default=False)
 
 
 class Results(models.Model):

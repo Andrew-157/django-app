@@ -24,6 +24,10 @@ def poll(request, poll_id):
 
 def results(request):
 
-    choice = request.POST['choice']
+    choice_id = request.POST['choice']
+    choice = Choice.objects.get(pk=choice_id)
 
-    return HttpResponse(choice)
+    if not choice.is_valid:
+        return HttpResponse('Incorrect')
+
+    return HttpResponse('Correct')
