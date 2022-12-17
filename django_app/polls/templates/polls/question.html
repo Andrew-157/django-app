@@ -7,10 +7,10 @@
     <title>Poll</title>
   </head>
   <body>
-    {{ question.question_text }} {% for choice in choices %}
-    <form action="">
+    {{ question.question_text }} {% for choice in choices %} {% csrf_token %}
+    <form action="http://127.0.0.1:8000/polls/result" method="post">
       <input type="radio" value="{{ choice.id }}" />
-      <label for="">{{ choice.choice_text }}</label><br>
+      <label for="">{{ choice.choice_text }}</label><br />
       {% endfor %}
       <input type="submit" value="choice" />
     </form>
