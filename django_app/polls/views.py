@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.template import loader
 from django.http import HttpResponse
 
 from .models import Question
@@ -7,11 +6,10 @@ from .models import Question
 
 def index(request):
 
-    template = loader.get_template('polls/index.html')
-
     question_list = Question.objects.order_by('-published_at')[:10]
+    context = {'question_list': question_list}
 
-    return HttpResponse(template.render({'question_list': question_list}, request))
+    return render(request, 'polls/index.html', context)
 
 
 def poll(request, poll_id):
