@@ -9,7 +9,7 @@
   <body>
     <ul>
       {% for q in question_list %}
-      <li>{{ q.question_text }}</li>
+      <li><a href="http://127.0.0.1:8000/polls/poll/{{q.id}}">{{ q.question_text }}</a></li>
       {% endfor %}
     </ul>
   </body>
