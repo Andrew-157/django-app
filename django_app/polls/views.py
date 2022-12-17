@@ -1,7 +1,28 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate as auth
 
 from .models import Question, Choice
+
+
+def create_user(request):
+
+    user = User.objects.create_user(username='jack',
+                                    email='jack@gmail.com',
+                                    password='password')
+
+    return HttpResponse('Success!')
+
+
+def authenticate(request):
+
+    user = auth(username='jack', password='password')
+
+    if not user:
+        return HttpResponse('Invalid')
+
+    return HttpResponse('Success!')
 
 
 def index(request):
