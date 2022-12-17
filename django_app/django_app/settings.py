@@ -77,7 +77,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
-            'file': 'db_info.cnf'
+            'read_default_file': 'db_info.cnf'
         }
     }
 }
