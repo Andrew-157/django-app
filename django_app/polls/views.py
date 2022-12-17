@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User, Permission
 from django.contrib.auth import authenticate as auth
@@ -19,6 +19,8 @@ def create_user(request):
 
 def authenticate(request):
 
+    get_object_or_404(User, username='senator')
+
     user = auth(username='jack', password='password')
 
     if not user:
@@ -32,7 +34,10 @@ def index(request):
     question_list = Question.objects.order_by('-published_at')[:10]
     context = {'question_list': question_list}
 
-    return render(request, 'polls/index.html', context)
+    if request.user.is_authenticated and request.user.has_perm('polls.super_mega_admin'):
+        return render(request, 'polls/index.html', context)
+    else:
+        return HttpResponse('Invalid Index')
 
 
 def poll(request, poll_id):
