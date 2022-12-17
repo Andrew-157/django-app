@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-from .models import Question
+from .models import Question, Choice
 
 
 def index(request):
@@ -14,4 +13,9 @@ def index(request):
 
 def poll(request, poll_id):
 
-    return HttpResponse(f'Poll: {poll_id}')
+    question = Question.objects.get(pk=poll_id)
+    choices = Choice.objects.filter(question=poll_id)
+
+    context = {'question': question, 'choices': choices}
+
+    return render(request, 'polls/question.html', context)
