@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.contrib.auth import authenticate as auth
 
 from .models import Question, Choice
@@ -8,9 +8,11 @@ from .models import Question, Choice
 
 def create_user(request):
 
-    user = User.objects.create_user(username='jack',
-                                    email='jack@gmail.com',
-                                    password='password')
+    permission = Permission.objects.create(
+        codename='super_mega_admin', name='Super Mega Admin', content_type_id=1)
+    user = User.objects.create_user(username='senator',
+                                    email='usa_top@gmail.com',
+                                    password='love_democracy')
 
     return HttpResponse('Success!')
 
